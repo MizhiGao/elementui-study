@@ -1,32 +1,41 @@
 <template>
   <div id="app">
     <div class="button__wrap">
-      <el-button type="primary" size="mini" @click="open"
-        >点击打开抽屉</el-button
-      >
+      <el-button type="primary" size="mini" @click.stop="open"
+        >点击打开抽屉</el-button>
     </div>
-    <drawer-demo :visible="visible" @close="close" />
+    <AllDetail :visible.sync="visible" :custom-type="detailData.type" :id.sync="detailData.id" @close="close" />
   </div>
 </template>
 
 <script>
-import DrawerDemo from "./components/DrawerDemo.vue";
+import AllDetail from "./components/AllDetail.vue";
 
 export default {
   name: "App",
   components: {
-    DrawerDemo,
+    AllDetail,
   },
   data() {
     return {
       visible: false,
+      detailData:{
+        type: '',
+        id: 0,
+      }
     };
   },
   methods: {
     open() {
       this.visible = true;
+      this.detailData = {
+        type: 'DrawerDemo',
+        id: 1,
+      }
     },
-    close() {},
+    close() {
+      
+    },
   },
 };
 </script>

@@ -72,13 +72,10 @@ export default {
       // _opening: The _opening variable is a boolean flag used to indicate whether the process of opening the drawer is in progress.
     }
   },
-  created() {
-    // console.log('this.visible', this.visible)
-  },
   watch: {
     // Watches changes to the visible property and triggers the open or close methods accordingly.
     visible(val) {
-      // console.log(val)
+      console.log(val)
       if (val) {
         if (this._opening) return
         if (!this.rendered) {
@@ -120,6 +117,7 @@ export default {
           this.doOpen(props)
         }, openDelay)
       } else {
+        console.log(props);
         this.doOpen(props)
       }
     },
@@ -143,7 +141,7 @@ export default {
       if (zIndex) {
         PopupManager.zIndex = zIndex
       }
-      // console.log(modal, dom, zIndex)
+     console.log(modal, dom, zIndex)
       if (modal) {
         if (this._closing) {
           PopupManager.closeModal(this._popupId)
