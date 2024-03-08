@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import MDrawer from "../components/Drawer/index.vue";
+import MDrawer from "../../components/Drawer/index.vue";
 // import { AllDetail } from "../components/AllDetail.vue";
 
 export default {
   name: "DrawerDemo",
   components: {
     MDrawer,
-    AllDetail: () => import('../components/AllDetail.vue'),
+    AllDetail: () => import('../../components/AllDetail.vue'),
   },
   props: {
      // 详情信息id

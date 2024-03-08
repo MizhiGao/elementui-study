@@ -16,8 +16,8 @@
 
 <script type="text/javascript">
 import { getMaxIndex } from '@/utils/index'
-import DrawerDemo from '../views/DrawerDemo.vue'
-import DrawerDemo2 from '../views/DrawerDemo2.vue'
+import DrawerDemo from '../views/DrawerExample/DrawerDemo.vue'
+import DrawerDemo2 from '../views/DrawerExample/DrawerDemo2.vue'
 export default {
   name: 'AllDetail',
   components: {

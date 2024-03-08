@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MDrawer from "../components/Drawer/index.vue";
+import MDrawer from "../../components/Drawer/index.vue";
 export default {
   name: "DrawerDemo2",
   components: {
