@@ -1,5 +1,5 @@
 <template>
-  <div ref="reference" class="xt-select"
+  <div v-elclickoutside="handleClose" ref="reference" class="xt-select"
      @click="containerClick">
     <!-- 选中内容回显 -->
     <div ref="tags" class="xt-select__tags">
@@ -13,23 +13,40 @@
 
     <!-- 选择框内容 -->
     <transition name="el-zoom-in-top" @before-enter="handleMenuEnter" @after-leave="doDestroy">
-        <select-dropdown
-          v-show="visible && !disabled"
-          ref="popper"
-          :append-to-body="popperAppendToBody">
-
-        </select-dropdown>
+      <select-dropdown
+      v-show="visible && !disabled"
+      ref="popper"
+      :append-to-body="popperAppendToBody">
+        <el-scrollbar>
+            <xt-options
+              v-loading="loading"
+              v-model="dataValue"
+              :disabled="disabled"
+              :options="optionsList"
+              :props="props"
+              :header-show="headerShow"
+              :max="limit"
+              @change="selectChange"
+              @close="visible = false" />
+        </el-scrollbar>
+      </select-dropdown>
     </transition>
     </div>
   </div>
 </template>
 
 <script>
+import elclickoutside from '../../directives/elclickoutside'
 import SelectDropdown from './src/SelectDropdown.vue'
+import XtOptions from './src/XtOptions.vue'
 export default {
   name: 'CustomSelect',
   components:{
     SelectDropdown,
+    XtOptions,
+  },
+  directives: {
+    elclickoutside,
   },
   props: {
     // 展示限制 0：展示全部
@@ -38,7 +55,19 @@ export default {
       default: 2
     },
     // 取值字段
-
+    props: {
+      type: Object,
+      default: () => {
+        return {
+          value: 'id',
+          label: 'realname'
+        }
+      }
+    },
+    headerShow: {
+      type: Boolean,
+      default: true
+    },
     // 选择限制
     limit: Number,
     placeholder: {
@@ -97,12 +126,18 @@ export default {
         }
       }
     },
+    handleClose() {
+      this.visible = false
+    },
     handleMenuEnter () {
 
     },
-    doDestroy () {
+    selectChange () {
 
-    }
+    },
+    doDestroy() {
+      this.$refs.popper && this.$refs.popper.doDestroy()
+    },
   }
 }
 </script>
