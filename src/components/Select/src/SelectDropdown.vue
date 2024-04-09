@@ -1,5 +1,5 @@
 <template>
-  <div :class="[popperClass]" :style="{minWidth:minWidth}" class="xt-select-dropdown xt-popper">
+  <div :class="[popperClass]" :style="{minWidth:minWidth}" class="el-popper xt-select-dropdown">
     <slot />
   </div>
 </template>
@@ -9,8 +9,17 @@ import Popper from 'element-ui/lib/utils/vue-popper'
 
 export default {
   name: 'SelectDropdown',
+  componentName: 'SelectDropdown',
   mixins: [Popper],
   props: {
+    placement: {
+      type: String,
+      default: 'bottom-start'
+    },
+    appendToBody: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
@@ -22,8 +31,14 @@ export default {
       return this.$parent.popperClass
     }
   },
-  mounted(){
-      console.log(this.$parent.$el, this.$el)
+  mounted () {
+    console.log('this.$parent.$el', this.$parent.$el, this.$el)
+    this.referenceElm = this.$parent.$el
+    this.$parent.popperElm = this.popperElm = this.$el
+    this.$on('updatePopper', () => {
+      if (this.$parent.visible) this.updatePopper()
+    })
+    this.$on('destroyPopper', this.destroyPopper)
   }
 
 }

@@ -1,0 +1,7 @@
+.xt-empty-parent--relative {
+  position: relative !important;
+}
+
+.xt-empty-parent--hidden {
+  overflow: hidden !important;
+}
